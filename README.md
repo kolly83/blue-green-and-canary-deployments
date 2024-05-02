@@ -1,42 +1,35 @@
 # Terraform Blue-Green Deployment Tutorial
 
-This tutorial demonstrates the implementation of blue-green deployments using Terraform, facilitating minimal downtime and risk by maintaining two synchronized production environments.
+This tutorial demonstrates blue-green deployments using Terraform to ensure minimal downtime by maintaining synchronized production environments.
 
 ## Overview
-The tutorial covers:
-- Provisioning of networking resources including VPCs, security groups, and load balancers.
-- Deployment of web servers to establish a blue environment.
-- Configuration of an additional set of web servers for a green environment.
-- Integration of feature toggles for flexible deployment strategies.
-- Execution of a canary test and the incremental promotion of the green environment.
+- Provision VPCs, security groups, and load balancers.
+- Deploy web servers for blue and green environments.
+- Use feature toggles for deployment strategies.
+- Perform canary testing and promote the green environment.
 
 ## Prerequisites
-- Terraform installed.
-- Familiarity with AWS services, notably EC2 and VPC.
-- Access to an AWS account.
+- Terraform installation.
+- Basic AWS EC2 and VPC knowledge.
+- AWS account access.
 
-## Step-by-Step Guide
+## Repository Files
+- `main.tf`: Sets up the VPC, security groups, and load balancers.
+- `variables.tf`: Defines essential variables like region and CIDR blocks.
+- `blue.tf`: Configures two AWS instances with web servers as "version 1.0".
+- `init-script.sh`: Script to initialize the web server.
+- `terraform.tf`: Specifies Terraform and AWS provider versions.
+- `.terraform.lock.hcl`: Locks dependencies for consistency.
 
-### 1. Infrastructure Setup
-- **Networking**: Set up a VPC with necessary security groups and load balancers.
-- **Blue Environment**: Deploy the initial web servers that will handle live traffic.
-
-### 2. Green Environment Setup
-- Provision a second set of web servers ready to transition from the blue environment.
-
-### 3. Feature Toggles Implementation
-- Integrate feature toggles to control traffic flow between environments.
-
-### 4. Canary Testing
-- Initially route a small fraction of traffic to the green environment, monitoring for performance and stability.
-
-### 5. Environment Promotion
-- Incrementally redirect traffic to the green environment until it serves all production traffic.
+## Steps
+1. **Infrastructure Setup**: Establish networking and blue environment servers.
+2. **Green Environment Setup**: Set up the alternative green servers.
+3. **Feature Toggles and Testing**: Implement toggles and test with a canary release.
+4. **Promotion**: Gradually shift traffic to the green environment.
 
 ## Conclusion
-This tutorial offers a structured approach to leveraging Terraform for blue-green deployments, enhancing CI/CD processes by mitigating risks associated with updates and releases.
+Leverage Terraform for efficient blue-green deployments to enhance CI/CD processes and minimize update risks.
 
 # Notes
-
 Learn how to use Terraform and AWS's Application Load Balancers for canary tests and blue/green deployments. Learn how to add feature flags to your Terraform configuration by using variables and conditionals. Follow along with [this
 tutorial](https://learn.hashicorp.com/tutorials/terraform/blue-green-canary-tests-deployments) on HashiCorp Learn.
